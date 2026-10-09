@@ -67,8 +67,12 @@ curl -s -A "Mozilla/5.0" https://x402-agent-pay.com/facilitator/heatmap
 
 **Grade any x402 endpoint from the buyer side**
 ```
-curl -s -A "Mozilla/5.0" "https://x402-agent-pay.com/facilitator/report?url=<endpoint>"
+curl -s -A "Mozilla/5.0" "https://x402-agent-pay.com/facilitator/report?url=<endpoint>[&method=POST]"
 ```
+Default probe is GET. If the GET probe finds no 402 the facilitator
+automatically re-probes with POST, so POST-only endpoints grade correctly
+without passing the param — but pass &method=POST up front for POST-only
+endpoints to skip the double probe.
 
 **Simulate a settle before funds move (no money moves)**
 ```
